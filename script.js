@@ -1,4 +1,3 @@
-
 const timeEl = document.getElementById('time');
 const dateEl = document.getElementById('date');
 const currentWeatherItemsEl = document.getElementById('current-weather-items');
@@ -46,7 +45,7 @@ function getWeatherData() {
 
 function showWeatherData(data) {
     let { humidity, pressure, sunrise, sunset, wind_speed } = data.current;
-
+    
     timezone.innerHTML = data.timezone;
     countryEl.innerHTML = data.lat + ' N  ' + data.lon + 'E';
 
@@ -74,12 +73,15 @@ function showWeatherData(data) {
     
     
     `;
-
+    const{icon}=data.current.weather[0];
     let otherDayForcast = ''
     data.daily.forEach((day, idx) => {
+        // console.log(day);
+        // const{id}=day.weather[0];
+        // console.log(id);
         if (idx == 0) {
             currentTempEl.innerHTML = `
-            <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@4x.png" alt="weather icon" class="w-icon">
+            <img src="http://openweathermap.org/img/wn/${icon}@4x.png" alt="weather icon" class="w-icon">
             <div class="other">
                 <div class="day">${window.moment(day.dt * 1000).format('dddd')}</div>
                 <div class="temp">Night - ${day.temp.night}&#176;C</div>
