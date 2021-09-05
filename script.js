@@ -59,7 +59,7 @@ function showWeatherData(data) {
         <div>${pressure} mb</div>
     </div>
     <div class="weather-item">
-        <div>Wind Speed:</div>
+        <div class="wind">Wind Speed:</div>
         <div>${wind_speed} km/h</div>
     </div>
     <div class="weather-item">
@@ -74,16 +74,21 @@ function showWeatherData(data) {
     
     `;
     const{icon}=data.current.weather[0];
+    // console.log(icon);
     let otherDayForcast = ''
     data.daily.forEach((day, idx) => {
         // console.log(day);
         // const{id}=day.weather[0];
         // console.log(id);
+
+        // const{feels_like} = day.feels_like;
+        // console.log(feels_like);
         if (idx == 0) {
             currentTempEl.innerHTML = `
             <img src="http://openweathermap.org/img/wn/${icon}@4x.png" alt="weather icon" class="w-icon">
             <div class="other">
                 <div class="day">${window.moment(day.dt * 1000).format('dddd')}</div>
+                <div class="feel">Feel Like-${data.current.feels_like}&#176; c</div>
                 <div class="temp">Night - ${day.temp.night}&#176;C</div>
                 <div class="temp">Day - ${day.temp.day}&#176;C</div>
             </div>
